@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="UTF-8">
+  <title>先捕获后冒泡</title>
+  <style>
+    #s1{height: 100px; background-color: aliceblue}
+    #s2{height: 50px; background-color: antiquewhite}
+  </style>
+</head>
+<body>
+<div id="s1">s1
+  <div id="s2">s2
+  </div>
+</div>
+
+<p style="display: none; ">
+  参考：http://www.cnblogs.com/hustskyking/p/problem-javascript-event.html#3201365
+</p>
+
+<script>
+  s1.addEventListener('click', function(evt){
+    console.log('s1 捕获');
+
+    // stopPropagation 阻止继续捕获和事件冒泡
+    evt.stopPropagation();
+  }, true)
+
+  s2.addEventListener('click', function(){
+    console.log('s2 捕获');
+  }, true)
+
+  s1.addEventListener('click', function(){
+    console.log('s1 冒泡');
+  }, false)
+
+  s2.addEventListener('click', function(){
+    console.log('s2 冒泡');
+  }, false)
+</script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+<body>
+
+<ul id="list">
+  <!-- TEMPLATE 模板 -->
+  <template id="tpl">
+    <li><span></span> - <span></span></li>
+  </template>
+</ul>
+<button id="btn">见证奇迹的时刻→</button>
+<script>
+  var datas = [
+    {name: "李靖", age: "21"},
+    {name: "Barret Lee", age: "21"}
+  ];
+  btn.onclick = function () {
+    for (var i = 0, len = datas.length; i < len; i++) {
+      var data = datas[i];
+      // 获取模板代码
+      var htmlTpl = tpl.content.cloneNode(true);
+      // 插入数据
+      var spans = htmlTpl.querySelectorAll("span");
+      spans[0].textContent = data.name;
+      spans[1].textContent = data.age;
+      // 插入到 DOM 中
+      list.appendChild(htmlTpl);
+    }
+  };
+</script>
+
+
+</body>
+</html>
