@@ -4,13 +4,16 @@
   <meta charset="UTF-8">
   <title>先捕获后冒泡</title>
   <style>
-    #s1{height: 100px; background-color: aliceblue}
-    #s2{height: 50px; background-color: antiquewhite}
+    #s1{height: 200px; background-color: aliceblue}
+    #s2{height: 100px; background-color: antiquewhite}
+    #s3{height: 50px; background-color: cadetblue}
   </style>
 </head>
 <body>
 <div id="s1">s1
   <div id="s2">s2
+    <div id="s3">s3
+    </div>
   </div>
 </div>
 
@@ -19,16 +22,29 @@
 </p>
 
 <script>
-  s1.addEventListener('click', function(evt){
-    console.log('s1 捕获');
+  /*
+   在 s2 上点击click，会发生“捕获”如下：document.body click > s1 click > s2 click ，到达 s2 源头；
+   然后，从 s2 冒泡 反向一遍到 document.body 为止
+  */
 
-    // stopPropagation 阻止继续捕获和事件冒泡
-    evt.stopPropagation();
+  document.body.addEventListener('click', function(){
+    console.log('body 捕获');
   }, true)
 
   s2.addEventListener('click', function(){
     console.log('s2 捕获');
   }, true)
+
+  s1.addEventListener('click', function(evt){
+    console.log('s1 捕获');
+    // stopPropagation 阻止继续捕获和事件冒泡
+//    evt.stopPropagation();
+  }, true)
+
+  s3.addEventListener('click', function(){
+    console.log('s3 捕获');
+  }, true)
+
 
   s1.addEventListener('click', function(){
     console.log('s1 冒泡');
@@ -36,6 +52,10 @@
 
   s2.addEventListener('click', function(){
     console.log('s2 冒泡');
+  }, false)
+
+  document.body.addEventListener('click', function(){
+    console.log('body 冒泡');
   }, false)
 </script>
 </body>
